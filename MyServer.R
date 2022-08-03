@@ -4,8 +4,7 @@ library(readxl)
 library(ggplot2)
 library(plotly)
 library(ggiraph)
-library(patchwork) # To display 2 charts together
-library(hrbrthemes)
+
 
 server <- function(input, output, session) {  
   source("data.R")
@@ -84,7 +83,10 @@ server <- function(input, output, session) {
       geom_step_interactive(Dividendos, mapping= aes(x=FECHA.INICIAL,y=T_div, color = MONEDA))+
       geom_step_interactive(Dividendos, mapping= aes(x=FECHA.INICIAL,y=Total, color = MONEDA),size=1)+ #Tipo de grafico
       
-      scale_y_continuous(breaks = scales::breaks_extended(n = 10), sec.axis = dup_axis())+ #Ajuste de saltos eje Y
+      scale_y_continuous(labels = scales::label_comma(), #Ajuste numeros eje Y
+                         breaks = scales::breaks_extended(n = 10),#Ajuste de saltos eje Y 
+                         name = "",
+                         sec.axis = sec_axis(~./4, name="Acumulados", labels = scales::label_comma()))+ #Eje secundario 
       scale_x_date(date_breaks = "2 months", #Saltos fecha eje X
                    date_labels = "%b-%y")+ #Formato de fecha eje X
       
@@ -108,7 +110,9 @@ server <- function(input, output, session) {
       geom_step_interactive(Dividendos, mapping= aes(x=FECHA.INICIAL,y=T_div, color = NEMOTECNICO),size=1)+ #Tipo de grafico
       
       scale_y_continuous(labels = scales::label_comma(), #Ajuste numeros eje Y
-                        breaks = scales::breaks_extended(n = 10), sec.axis = sec_axis(~.*4), name="acumulados")+ #Ajuste de saltos eje Y
+                         breaks = scales::breaks_extended(n = 10),#Ajuste de saltos eje Y
+                         name = "", 
+                         sec.axis = sec_axis(~./4, name="Acumulados", labels = scales::label_comma()))+ #Eje secundario
       scale_x_date(date_breaks = "2 months", #Saltos fecha eje X
                    date_labels = "%b-%y")+ #Formato de fecha eje X
       
@@ -154,7 +158,7 @@ server <- function(input, output, session) {
     Reac_b <- Retorno_Precio() #Establece df Reac_b con la información de la funcion reactiva Retorno_Precio().
     tail(Reac_b$Precio,1) - head(Reac_b$Precio,1) #Resta el valor de la ultima fila de la columna Precio con el primer valor de la columna Precio para dar la diferencia de precios.
   })
-  
+
   
   
 }
