@@ -80,8 +80,8 @@ server <- function(input, output, session) {
     Dividendos <- Base_AD() #Se establece el df Dividendos con la información de la función reactiva Base_AD()
     ggplot()+ #Seleccion de base de datos, columnas de los ejes x, y, color dependiendo el tipo de moneda.
      
-      geom_step_interactive(Dividendos, mapping= aes(x=FECHA.INICIAL,y=T_div, color = MONEDA))+
-      geom_step_interactive(Dividendos, mapping= aes(x=FECHA.INICIAL,y=Total, color = MONEDA),size=1)+ #Tipo de grafico
+      geom_step_interactive(Dividendos, mapping= aes(x=FECHA.INICIAL,y=Total, color = MONEDA))+
+      geom_step_interactive(Dividendos, mapping= aes(x=FECHA.INICIAL,y=T_div, color = MONEDA),size=1)+ #Tipo de grafico
       
       scale_y_continuous(labels = scales::label_comma(), #Ajuste numeros eje Y
                          breaks = scales::breaks_extended(n = 10),#Ajuste de saltos eje Y 
