@@ -94,7 +94,7 @@ server <- function(input, output, session) {
       
       theme(panel.background = element_rect(fill = "white"), text = element_text(size = 15), 
             panel.border = element_blank(), 
-            panel.grid.major = element_blank(),
+            panel.grid.major = element_line(colour = "grey", linetype = "dotted"),
             panel.grid.minor = element_blank(),
             axis.line.x = element_line(color = "black"), 
             axis.line.y = element_line(colour = "black")
@@ -120,7 +120,7 @@ server <- function(input, output, session) {
       
       theme(panel.background = element_rect(fill = "white"), text = element_text(size = 15), 
             panel.border = element_blank(), 
-            panel.grid.major = element_blank(),
+            panel.grid.major = element_line(colour = "grey", linetype = "dotted"),
             panel.grid.minor = element_blank(),
             axis.line.x = element_line(color = "black"), 
             axis.line.y = element_line(colour = "black")
